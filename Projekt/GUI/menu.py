@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk, PhotoImage
 import os
 from auth import *
 from PIL import Image, ImageTk
@@ -73,6 +72,18 @@ class MainMenuWindow:
         self.message_label = tk.Label(self.master, textvariable=self.message_var, fg="red", bg="black")
         self.canvas.create_window(400, 400, window=self.message_label)
 
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(script_dir)
+
+        image_path = os.path.join(parent_dir, "Assets", "wyjscie.png")
+        button_img = Image.open(image_path)
+        button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
+        self.wyjscie_image = ImageTk.PhotoImage(button_img)
+
+        self.button_wyjscie = self.canvas.create_image(640, 540, image=self.wyjscie_image)
+
+        #self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.exit)
+
     def try_login(self):
         login_input = self.login_entry.get()
         password = self.password_entry.get()
@@ -105,5 +116,9 @@ class MainMenuWindow:
 
     def logowanie(self, event):
         print("Logowanie")
+
+    #def exit(self, event = None):
+     #   self.master.deiconify()
+      #  self.master.destroy()
 
 
