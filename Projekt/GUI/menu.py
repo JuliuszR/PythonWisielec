@@ -1,7 +1,7 @@
 import tkinter as tk
-from tkinter import ttk, PhotoImage
 import os
 from PIL import Image, ImageTk
+from .NewGameWindow import NewGameWindow
 
 class MainMenuWindow:
     def __init__(self, master):
@@ -46,8 +46,9 @@ class MainMenuWindow:
         self.canvas.tag_bind(self.button_logowanie, "<Button-1>", self.logowanie)
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
 
-    def start_new_game(self, event):
-        print("Nowa gra kliknięta!")
+    def start_new_game(self, event=None):
+        self.master.destroy()
+        NewGameWindow()
 
     def wyjscie(self, event):
         print("Wyjscie")
@@ -55,7 +56,4 @@ class MainMenuWindow:
     def logowanie(self, event):
         print("Logowanie")
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = MainMenuWindow(root)
-    root.mainloop()
+
