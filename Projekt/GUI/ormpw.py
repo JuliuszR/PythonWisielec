@@ -4,11 +4,13 @@
 import os
 from peewee import *
 
-if os.path.exists('test.db'):
-    #os.remove('test.db')
+db_path = 'test.db'
+if os.path.exists(db_path):
+    #os.remove(db_path)
     pass
 
-baza = SqliteDatabase('test.db')
+baza = SqliteDatabase(db_path)
+
 
 class BazaModel(Model):
     class Meta:
@@ -20,6 +22,7 @@ class Haslo(BazaModel):
 class User(BazaModel):
     login = TextField(null=False)
     password = TextField(null=False)
+    wins = IntegerField(null=False)
 
 baza.connect()
 baza.create_tables([Haslo, User], safe=True)

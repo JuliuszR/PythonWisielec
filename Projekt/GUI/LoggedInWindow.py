@@ -1,5 +1,6 @@
 import tkinter as tk
 import os
+from StatsWindow import StatsWindow
 from PIL import Image, ImageTk
 
 class LoggedInWindow:
@@ -44,6 +45,12 @@ class LoggedInWindow:
         self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
 
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.exit)
+        self.canvas.tag_bind(self.button_statystki, "<Button-1>", self.open_stats)
+
+    def open_stats(self, event=None):
+        win = StatsWindow(self.master)
+        win.grab_set()
+        win.focus_force()
 
     def on_close(self):
         self.master.deiconify()
