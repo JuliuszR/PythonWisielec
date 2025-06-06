@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk, PhotoImage
 import os
 from PIL import Image, ImageTk
 
@@ -21,9 +22,18 @@ class MainMenuWindow:
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
-        self.start_button = tk.Button(self.master, text="Nowa Gra", font=("Helvetica", 14, "bold"))
-        self.start_button_window = self.canvas.create_window(400, 300, anchor="center", window=self.start_button)
 
+        image_path = os.path.join(parent_dir, "Assets", "nowaGra.png")
+        button_img = Image.open(image_path)
+        button_img = button_img.resize((200, 80), Image.Resampling.LANCZOS)
+        self.new_game_image = ImageTk.PhotoImage(button_img)
+
+        self.button_id = self.canvas.create_image(400, 300, image=self.new_game_image)
+
+        self.canvas.tag_bind(self.button_id, "<Button-1>", self.start_new_game)
+
+    def start_new_game(self, event):
+        print("Nowa gra kliknięta!")
 
 if __name__ == "__main__":
     root = tk.Tk()
