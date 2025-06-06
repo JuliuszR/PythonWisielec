@@ -1,4 +1,4 @@
-from GUI.menu import MainMenuWindow
+from menu import MainMenuWindow
 import tkinter as tk
 
 if __name__ == "__main__":

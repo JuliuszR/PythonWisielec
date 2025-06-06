@@ -3,6 +3,7 @@ from tkinter import ttk, PhotoImage
 import os
 from auth import *
 from PIL import Image, ImageTk
+from LoggedInWindow import LoggedInWindow
 
 class MainMenuWindow:
     def __init__(self, master):
@@ -79,6 +80,9 @@ class MainMenuWindow:
         success, result = login(login_input, password)
         if success:
             self.message_var.set("Zalogowano jako " + result["login"])
+
+            self.master.withdraw()
+            self.loggedInWindow = LoggedInWindow(self.master)
         else:
             self.message_var.set(result)
 
@@ -93,7 +97,8 @@ class MainMenuWindow:
 
 
     def start_new_game(self, event):
-        print("Nowa gra kliknięta!")
+        self.master.withdraw()
+        #self.new_game_window = NewGameWindow(self.master)
 
     def wyjscie(self, event):
         print("Wyjscie")
@@ -101,7 +106,4 @@ class MainMenuWindow:
     def logowanie(self, event):
         print("Logowanie")
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = MainMenuWindow(root)
-    root.mainloop()
+
