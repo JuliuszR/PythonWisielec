@@ -3,6 +3,7 @@ import os
 from auth import *
 from PIL import Image, ImageTk
 from LoggedInWindow import LoggedInWindow
+from NewGameWindow import NewGameWindow
 
 class MainMenuWindow:
     def __init__(self, master):
@@ -109,7 +110,7 @@ class MainMenuWindow:
 
     def start_new_game(self, event):
         self.master.withdraw()
-        #self.new_game_window = NewGameWindow(self.master)
+        self.new_game_window = NewGameWindow(self.master)
 
     def wyjscie(self, event):
         print("Wyjscie")

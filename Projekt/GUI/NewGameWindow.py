@@ -4,10 +4,13 @@ from PIL import Image, ImageTk
 
 class NewGameWindow:
     def __init__(self, master = None):
+        self.master = master
         self.window = tk.Toplevel(master)
         self.window.title("New Game Window")
         self.window.geometry("800x600")
         self.window.resizable(False, False)
+
+        self.window.protocol("WM_DELETE_WINDOW", self.on_close)
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(script_dir)
@@ -21,11 +24,25 @@ class NewGameWindow:
         self.canvas.pack(fill="both", expand=True)
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
-        image_path = os.path.join(parent_dir, "Assets", "rejestracja.png")
+        #przyciski do wyboru gry trybu
+
+
+
+        #wyjscie
+        image_path = os.path.join(parent_dir, "Assets", "wyjscie.png")
         button_img = Image.open(image_path)
         button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
-        self.rejestracja = ImageTk.PhotoImage(button_img)
+        self.wyjscie_image = ImageTk.PhotoImage(button_img)
 
-        self.button_id = self.canvas.create_image(400, 260, image=self.rejestracja)
+        self.button_wyjscie = self.canvas.create_image(640, 540, image=self.wyjscie_image)
 
-        self.window.mainloop()
+        self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.exit)
+
+    def on_close(self):
+        self.master.deiconify()
+        self.window.destroy()
+
+    def exit(self, event = None):
+        if self.master is not None:
+            self.master.deiconify()
+        self.window.destroy()
