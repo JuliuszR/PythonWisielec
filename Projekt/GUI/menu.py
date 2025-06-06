@@ -1,7 +1,8 @@
 import tkinter as tk
+from tkinter import ttk, PhotoImage
 import os
+from auth import *
 from PIL import Image, ImageTk
-from .NewGameWindow import NewGameWindow
 
 class MainMenuWindow:
     def __init__(self, master):
@@ -43,12 +44,56 @@ class MainMenuWindow:
         self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
 
         self.canvas.tag_bind(self.button_id, "<Button-1>", self.start_new_game)
-        self.canvas.tag_bind(self.button_logowanie, "<Button-1>", self.logowanie)
+        self.canvas.tag_bind(self.button_logowanie, "<Button-1>", lambda e : self.show_login_screen())
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
 
-    def start_new_game(self, event=None):
-        self.master.destroy()
-        NewGameWindow()
+
+
+    def show_login_screen(self):
+        self.canvas.delete("all")
+        self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
+
+        self.login_entry = tk.Entry(self.master, font=("Arial", 14))
+        self.password_entry = tk.Entry(self.master, show="*", font=("Arial", 14))
+
+        self.canvas.create_text(400, 180, text="Login", fill="white", font=("Arial", 18, "bold"))
+        self.canvas.create_window(400, 210, window=self.login_entry)
+
+        self.canvas.create_text(400, 260, text="Hasło", fill="white", font=("Arial", 18, "bold"))
+        self.canvas.create_window(400, 290, window=self.password_entry)
+
+        self.login_btn = tk.Button(self.master, text="Zaloguj", command=self.try_login)
+        self.canvas.create_window(350, 350, window=self.login_btn)
+
+        self.register_btn = tk.Button(self.master, text="Zarejestruj", command=self.try_register)
+        self.canvas.create_window(450, 350, window=self.register_btn)
+
+        self.message_var = tk.StringVar()
+        self.message_label = tk.Label(self.master, textvariable=self.message_var, fg="red", bg="black")
+        self.canvas.create_window(400, 400, window=self.message_label)
+
+    def try_login(self):
+        login_input = self.login_entry.get()
+        password = self.password_entry.get()
+
+        success, result = login(login_input, password)
+        if success:
+            self.message_var.set("Zalogowano jako " + result["login"])
+        else:
+            self.message_var.set(result)
+
+    def try_register(self):
+        login = self.login_entry.get()
+        password = self.password_entry.get()
+
+        success, msg = register(login, password)
+        self.message_var.set(msg)
+
+
+
+
+    def start_new_game(self, event):
+        print("Nowa gra kliknięta!")
 
     def wyjscie(self, event):
         print("Wyjscie")
@@ -56,4 +101,7 @@ class MainMenuWindow:
     def logowanie(self, event):
         print("Logowanie")
 
-
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = MainMenuWindow(root)
+    root.mainloop()
