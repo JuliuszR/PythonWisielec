@@ -113,7 +113,7 @@ class MainMenuWindow:
         self.new_game_window = NewGameWindow(self.master)
 
     def wyjscie(self, event):
-        print("Wyjscie")
+        self.master.destroy()
 
     def logowanie(self, event):
         print("Logowanie")
