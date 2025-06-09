@@ -21,8 +21,7 @@ class HangmanWindow:
 
         self.haslo = haslo.upper() if haslo else self.losuj_haslo().upper()
         self.odkryte = ['_' if c != ' ' else ' ' for c in self.haslo]
-        self.ilosc_prob = 10
-        self.max_prob = 10
+        self.ilosc_prob = 6
         self.uzyte_litery = set()
 
         self.canvas = tk.Canvas(self.window, width=800, height=600)

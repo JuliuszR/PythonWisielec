@@ -86,5 +86,6 @@ class NewGameWindow:
 
         get_custom_word()
 
-    def ModeSecond(self, event = None):
-        print("ModeSecond")
+    def ModeSecond(self, event=None):
+        self.window.withdraw()
+        self.hangman_window = HangmanWindow()

@@ -38,5 +38,3 @@ def readData():
     for haslo in Haslo.select():
         print(haslo.tekst)
     print()
-
-readData()
