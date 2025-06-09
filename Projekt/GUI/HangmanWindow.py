@@ -1,6 +1,8 @@
 import tkinter as tk
 import random
 from ormpw import Haslo
+from PIL import Image, ImageTk
+import os
 
 class HangmanWindow:
     def __init__(self, haslo=None):
@@ -9,13 +11,23 @@ class HangmanWindow:
         self.window.geometry("800x600")
         self.window.resizable(False, False)
 
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(script_dir)
+        image_path = os.path.join(parent_dir, "Assets", "wisielec.png")
+
+        self.bg_image = Image.open(image_path)
+        self.bg_image = self.bg_image.resize((800, 600))
+        self.bg_photo = ImageTk.PhotoImage(self.bg_image)
+
         self.haslo = haslo.upper() if haslo else self.losuj_haslo().upper()
         self.odkryte = ['_' if c != ' ' else ' ' for c in self.haslo]
-        self.ilosc_prob = 10
+        self.ilosc_prob = 6
         self.uzyte_litery = set()
 
-        self.canvas = tk.Canvas(self.window, width=800, height=600, bg="#1a1a1a")
+        self.canvas = tk.Canvas(self.window, width=800, height=600)
         self.canvas.pack(fill="both", expand=True)
+        self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
+
 
         self.word_label = tk.Label(self.window, text=" ".join(self.odkryte), font=("Consolas", 24), fg="white", bg="#1a1a1a")
         self.canvas.create_window(400, 100, window=self.word_label)
