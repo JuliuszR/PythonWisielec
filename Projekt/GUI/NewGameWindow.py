@@ -63,10 +63,28 @@ class NewGameWindow:
             self.master.deiconify()
         self.window.destroy()
 
-    def ModeFirst(self, event = None):
-        print("ModeFirst")
-        self.window.withdraw()
-        self.hangman_window = HangmanWindow()
+    def ModeFirst(self, event=None):
+        def get_custom_word():
+            popup = tk.Toplevel(self.window)
+            popup.title("Wprowadź hasło")
+            popup.geometry("400x200")
+            popup.resizable(False, False)
+
+            tk.Label(popup, text="Podaj hasło do zgadywania:", font=("Arial", 14)).pack(pady=10)
+            entry = tk.Entry(popup, font=("Arial", 14))
+            entry.pack(pady=10)
+
+            def submit():
+                word = entry.get().strip()
+                if word:
+                    popup.destroy()
+                    self.window.withdraw()
+                    self.hangman_window = HangmanWindow(haslo=word)
+
+            submit_btn = tk.Button(popup, text="Rozpocznij grę", command=submit)
+            submit_btn.pack(pady=10)
+
+        get_custom_word()
 
     def ModeSecond(self, event = None):
         print("ModeSecond")

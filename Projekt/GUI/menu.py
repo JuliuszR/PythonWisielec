@@ -101,7 +101,6 @@ class MainMenuWindow:
     def try_register(self):
         login = self.login_entry.get()
         password = self.password_entry.get()
-
         success, msg = register(login, password)
         self.message_var.set(msg)
 
