@@ -37,8 +37,8 @@ class MainMenuWindow:
         button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
         self.wyjscie_image = ImageTk.PhotoImage(button_img)
 
-        self.button_logowanie = self.canvas.create_image(400, 320, image=self.logowanie_image)
-        self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
+        self.button_logowanie = self.canvas.create_image(400, 280, image=self.logowanie_image)
+        self.button_wyjscie = self.canvas.create_image(400, 370, image=self.wyjscie_image)
 
         self.canvas.tag_bind(self.button_logowanie, "<Button-1>", lambda e : self.show_login_screen())
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
