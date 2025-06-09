@@ -39,7 +39,6 @@ class HangmanWindow:
         self.canvas.create_window(400, 220, window=self.guess_btn)
 
         self.status_var = tk.StringVar()
-        self.status_var.set(f"Pozostałe próby: {self.ilosc_prob}")
         self.status_label = tk.Label(self.window, textvariable=self.status_var, fg="white", bg="#1a1a1a", font=("Arial", 14))
         self.canvas.create_window(400, 260, window=self.status_label)
 
@@ -48,7 +47,6 @@ class HangmanWindow:
         self.used_label = tk.Label(self.window, textvariable=self.used_var, fg="white", bg="#1a1a1a", font=("Arial", 12))
         self.canvas.create_window(400, 300, window=self.used_label)
 
-        # wczytanie obrazka serca
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(script_dir)
         heart_path = os.path.join(parent_dir, "Assets", "serce.png")
@@ -57,10 +55,8 @@ class HangmanWindow:
         heart_img = heart_img.resize((40, 40), Image.Resampling.LANCZOS)
         self.heart_photo = ImageTk.PhotoImage(heart_img)
 
-        # lista ID obrazków serc na canvasie
         self.serca = []
 
-        # wyświetlenie serc na canvasie (np. w prawym górnym rogu)
         for i in range(self.ilosc_prob):
             x = 700 - i * 45
             y = 50
