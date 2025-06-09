@@ -1,5 +1,7 @@
 import tkinter as tk
 import os
+
+from Projekt.GUI.NewGameWindow import NewGameWindow
 from StatsWindow import StatsWindow
 from PIL import Image, ImageTk
 
@@ -44,6 +46,7 @@ class LoggedInWindow:
         self.button_statystki = self.canvas.create_image(400, 320, image=self.statystki_image)
         self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
 
+        self.canvas.tag_bind(self.button_id, "<Button-1>", self.start_new_game)
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.exit)
         self.canvas.tag_bind(self.button_statystki, "<Button-1>", self.open_stats)
 
@@ -59,4 +62,10 @@ class LoggedInWindow:
     def exit(self, event = None):
         if self.master is not None:
             self.master.deiconify()
+        self.window.destroy()
+
+    def start_new_game(self, event=None):
+        win = NewGameWindow(self.master)
+        win.window.grab_set()
+        win.window.focus_force()
         self.window.destroy()
