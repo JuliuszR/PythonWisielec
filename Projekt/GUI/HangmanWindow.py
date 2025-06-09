@@ -30,22 +30,22 @@ class HangmanWindow:
 
 
         self.word_label = tk.Label(self.window, text=" ".join(self.odkryte), font=("Consolas", 24), fg="white", bg="#1a1a1a")
-        self.canvas.create_window(400, 100, window=self.word_label)
+        self.canvas.create_window(400, 190, window=self.word_label)
 
         self.guess_entry = tk.Entry(self.window, font=("Arial", 18))
-        self.canvas.create_window(400, 180, window=self.guess_entry)
+        self.canvas.create_window(400, 260, window=self.guess_entry)
 
         self.guess_btn = tk.Button(self.window, text="Zgadnij", command=self.zgadnij)
-        self.canvas.create_window(400, 220, window=self.guess_btn)
+        self.canvas.create_window(400, 300, window=self.guess_btn)
 
         self.status_var = tk.StringVar()
         self.status_label = tk.Label(self.window, textvariable=self.status_var, fg="white", bg="#1a1a1a", font=("Arial", 14))
-        self.canvas.create_window(400, 260, window=self.status_label)
+        self.canvas.create_window(400, 360, window=self.status_label)
 
         self.used_var = tk.StringVar()
         self.used_var.set("Użyte litery: ")
         self.used_label = tk.Label(self.window, textvariable=self.used_var, fg="white", bg="#1a1a1a", font=("Arial", 12))
-        self.canvas.create_window(400, 300, window=self.used_label)
+        self.canvas.create_window(400, 420, window=self.used_label)
 
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(script_dir)
