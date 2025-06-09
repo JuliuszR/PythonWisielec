@@ -6,8 +6,9 @@ from StatsWindow import StatsWindow
 from PIL import Image, ImageTk
 
 class LoggedInWindow:
-    def __init__(self, master = None):
+    def __init__(self, master = None, user=None):
         self.master = master
+        self.user = user
         self.window = tk.Toplevel(master)
         self.window.title("Logged in Window")
         self.window.geometry("800x600")
@@ -65,7 +66,7 @@ class LoggedInWindow:
         self.window.destroy()
 
     def start_new_game(self, event=None):
-        win = NewGameWindow(self.master)
+        win = NewGameWindow(self.master, user=self.user)
         win.window.grab_set()
         win.window.focus_force()
         self.window.destroy()

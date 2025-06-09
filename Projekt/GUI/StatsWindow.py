@@ -2,6 +2,7 @@
 import tkinter as tk
 from auth import User
 
+
 class StatsWindow(tk.Toplevel):
     def __init__(self, master=None):
         super().__init__(master)

@@ -4,8 +4,9 @@ from HangmanWindow import HangmanWindow
 from PIL import Image, ImageTk
 
 class NewGameWindow:
-    def __init__(self, master = None):
+    def __init__(self, master = None, user=None):
         self.master = master
+        self.user = user
         self.window = tk.Toplevel(master)
         self.window.title("New Game Window")
         self.window.geometry("800x600")
@@ -79,7 +80,7 @@ class NewGameWindow:
                 if word:
                     popup.destroy()
                     self.window.withdraw()
-                    self.hangman_window = HangmanWindow(haslo=word)
+                    self.hangman_window = HangmanWindow(user=self.user, haslo=word)
 
             submit_btn = tk.Button(popup, text="Rozpocznij grę", command=submit)
             submit_btn.pack(pady=10)
@@ -88,4 +89,4 @@ class NewGameWindow:
 
     def ModeSecond(self, event=None):
         self.window.withdraw()
-        self.hangman_window = HangmanWindow()
+        self.hangman_window = HangmanWindow(user=self.user)

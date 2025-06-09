@@ -30,7 +30,7 @@ def login(login_input, password):
     hashed = hash_password(password)
     try:
         user = User.get((User.login == login_input) & (User.password == hashed))
-        return True, {"id": user.id, "login": user.login, "wins": user.wins}
+        return True, user
     except User.DoesNotExist:
         return False, "Błędny login lub hasło"
 
@@ -38,3 +38,9 @@ def add_win_to_user(user_id):
     user = User.get_by_id(user_id)
     user.wins += 1
     user.save()
+
+def get_user_by_login(login_input):
+    try:
+        return User.get(User.login == login_input)
+    except User.DoesNotExist:
+        return None

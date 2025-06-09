@@ -25,10 +25,7 @@ class MainMenuWindow:
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
 
-        image_path = os.path.join(parent_dir, "Assets", "nowaGra.png")
-        button_img = Image.open(image_path)
-        button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
-        self.new_game_image = ImageTk.PhotoImage(button_img)
+
 
         image_path = os.path.join(parent_dir, "Assets", "logowanie.png")
         button_img = Image.open(image_path)
@@ -40,11 +37,9 @@ class MainMenuWindow:
         button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
         self.wyjscie_image = ImageTk.PhotoImage(button_img)
 
-        self.button_id = self.canvas.create_image(400, 260, image=self.new_game_image)
         self.button_logowanie = self.canvas.create_image(400, 320, image=self.logowanie_image)
         self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
 
-        self.canvas.tag_bind(self.button_id, "<Button-1>", self.start_new_game)
         self.canvas.tag_bind(self.button_logowanie, "<Button-1>", lambda e : self.show_login_screen())
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
 
@@ -91,10 +86,10 @@ class MainMenuWindow:
 
         success, result = login(login_input, password)
         if success:
-            self.message_var.set("Zalogowano jako " + result["login"])
+            self.message_var.set("Zalogowano jako " + result.login)
 
             self.master.withdraw()
-            self.loggedInWindow = LoggedInWindow(self.master)
+            self.loggedInWindow = LoggedInWindow(self.master, user=result)
         else:
             self.message_var.set(result)
 
@@ -108,17 +103,16 @@ class MainMenuWindow:
         self.canvas.delete("all")
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
-        self.button_id = self.canvas.create_image(400, 260, image=self.new_game_image)
         self.button_logowanie = self.canvas.create_image(400, 320, image=self.logowanie_image)
         self.button_wyjscie = self.canvas.create_image(400, 380, image=self.wyjscie_image)
 
-        self.canvas.tag_bind(self.button_id, "<Button-1>", self.start_new_game)
         self.canvas.tag_bind(self.button_logowanie, "<Button-1>", lambda e: self.show_login_screen())
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
 
     def start_new_game(self, event):
         self.master.withdraw()
-        self.new_game_window = NewGameWindow(self.master)
+
+        win = NewGameWindow(self.master, user=self.user)
 
     def wyjscie(self, event):
         self.master.destroy()
