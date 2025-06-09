@@ -27,7 +27,7 @@ class NewGameWindow:
 
         #przyciski do wyboru gry trybu
         #1 gra gdzie ktos wymysla haslo
-        image_path = os.path.join(parent_dir, "Assets", "wyjscie.png")
+        image_path = os.path.join(parent_dir, "Assets", "tryb1.png")
         button_img = Image.open(image_path)
         button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
         self.tryb1_image = ImageTk.PhotoImage(button_img)
@@ -36,7 +36,7 @@ class NewGameWindow:
         self.canvas.tag_bind(self.tryb1, "<Button-1>", self.ModeFirst)
 
         #2 gra haslo z bazy
-        image_path = os.path.join(parent_dir, "Assets", "wyjscie.png")
+        image_path = os.path.join(parent_dir, "Assets", "tryb2.png")
         button_img = Image.open(image_path)
         button_img = button_img.resize((210, 100), Image.Resampling.LANCZOS)
         self.tryb2_image  = ImageTk.PhotoImage(button_img)
