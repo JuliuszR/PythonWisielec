@@ -5,7 +5,15 @@ from PIL import Image, ImageTk
 import os
 
 class HangmanWindow:
+    """
+    Okienko z grą
+    """
     def __init__(self, haslo=None, user=None):
+        """
+        Metoda inicializujaca okno
+        :param haslo:
+        :param user:
+        """
         self.user = user
         self.window = tk.Toplevel()
         self.window.title("Wisielec")
@@ -69,12 +77,20 @@ class HangmanWindow:
         self.window.grab_set()
 
     def losuj_haslo(self):
+        """
+        Tryb 2: losowe haslo
+        :return: losowe haslo z bazy danych
+        """
         wszystkie = list(Haslo.select())
         if not wszystkie:
             return "BRAK HASLA"
         return random.choice(wszystkie).tekst
 
     def zgadnij(self):
+        """
+        Dodanie litery do zgadnietych liter / sprawdzenie wygranych
+        :return:
+        """
         litera = self.guess_entry.get().upper()
         self.guess_entry.delete(0, tk.END)
 
@@ -117,6 +133,10 @@ class HangmanWindow:
 
 
     def exit_back(self):
+        """
+        Wroc do poprzedniego okna
+        :return:
+        """
         if self.window.master:
             self.window.master.deiconify()
         self.window.destroy()

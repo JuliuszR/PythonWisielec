@@ -4,6 +4,9 @@ from HangmanWindow import HangmanWindow
 from PIL import Image, ImageTk
 
 class NewGameWindow:
+    """
+    Ekran wyboru trybu
+    """
     def __init__(self, master = None, user=None):
         self.master = master
         self.user = user
@@ -56,15 +59,29 @@ class NewGameWindow:
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.exit)
 
     def on_close(self):
+        """
+        Zamkniecie
+        :return:
+        """
         self.master.deiconify()
         self.window.destroy()
 
     def exit(self, event = None):
+        """
+        Powrot do poprzedniego ekranu
+        :param event:
+        :return:
+        """
         if self.master is not None:
             self.master.deiconify()
         self.window.destroy()
 
     def ModeFirst(self, event=None):
+        """
+        Tryb 1
+        :param event:
+        :return:
+        """
         def get_custom_word():
             popup = tk.Toplevel(self.window)
             popup.title("Wprowadź hasło")
@@ -88,5 +105,10 @@ class NewGameWindow:
         get_custom_word()
 
     def ModeSecond(self, event=None):
+        """
+        Tryb 2
+        :param event:
+        :return:
+        """
         self.window.withdraw()
         self.hangman_window = HangmanWindow(user=self.user)

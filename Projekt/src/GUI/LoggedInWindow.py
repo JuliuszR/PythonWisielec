@@ -1,11 +1,14 @@
 import tkinter as tk
 import os
 
-from Projekt.GUI.NewGameWindow import NewGameWindow
+from Projekt.src.GUI.NewGameWindow import NewGameWindow
 from StatsWindow import StatsWindow
 from PIL import Image, ImageTk
 
 class LoggedInWindow:
+    """
+    Okno po zalogowaniu
+    """
     def __init__(self, master = None, user=None):
         self.master = master
         self.user = user
@@ -52,20 +55,35 @@ class LoggedInWindow:
         self.canvas.tag_bind(self.button_statystki, "<Button-1>", self.open_stats)
 
     def open_stats(self, event=None):
+        """
+        Otwiera okno ze statystykami
+        :param event:
+        :return:
+        """
         win = StatsWindow(self.master)
         win.grab_set()
         win.focus_force()
 
     def on_close(self):
+        """
+        Zamyka aplikacje
+        :return:
+        """
         self.master.deiconify()
         self.window.destroy()
 
     def exit(self, event = None):
+        """
+        Wraca do poprzedniego okna
+        :param event:
+        :return:
+        """
         if self.master is not None:
             self.master.deiconify()
         self.window.destroy()
 
     def start_new_game(self, event=None):
+        """Otwiera wybor trybu"""
         win = NewGameWindow(self.master, user=self.user)
         win.window.grab_set()
         win.window.focus_force()

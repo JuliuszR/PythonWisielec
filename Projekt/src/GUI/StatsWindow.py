@@ -4,6 +4,9 @@ from auth import User
 
 
 class StatsWindow(tk.Toplevel):
+    """
+    Okno ze statystykami
+    """
     def __init__(self, master=None):
         super().__init__(master)
         self.title("Statystyki graczy")
@@ -50,6 +53,10 @@ class StatsWindow(tk.Toplevel):
         self.populate_stats()
 
     def populate_stats(self):
+        """
+        Wprowadzenie statystyk z bazy danych
+        :return:
+        """
         self.tree.delete(*self.tree.get_children())
         for user in User.select().order_by(User.wins.desc(), User.login.asc()):
             self.tree.insert("", "end", values=(user.login, user.wins))

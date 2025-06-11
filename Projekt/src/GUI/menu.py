@@ -6,6 +6,9 @@ from LoggedInWindow import LoggedInWindow
 from NewGameWindow import NewGameWindow
 
 class MainMenuWindow:
+    """
+    Glowne okno aplikacji
+    """
     def __init__(self, master):
         self.master = master
         self.master.title("WISIELEC")
@@ -46,6 +49,10 @@ class MainMenuWindow:
 
 
     def show_login_screen(self):
+        """
+        Otwiera okno logowania
+        :return:
+        """
         self.canvas.delete("all")
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
@@ -81,6 +88,10 @@ class MainMenuWindow:
 
 
     def try_login(self):
+        """
+        Proba logowania
+        :return:
+        """
         login_input = self.login_entry.get()
         password = self.password_entry.get()
 
@@ -94,12 +105,21 @@ class MainMenuWindow:
             self.message_var.set(result)
 
     def try_register(self):
+        """
+        Rejestracja
+        :return:
+        """
         login = self.login_entry.get()
         password = self.password_entry.get()
         success, msg = register(login, password)
         self.message_var.set(msg)
 
     def back_to_main_menu(self, event=None):
+        """
+        Powrot do menu glownego
+        :param event:
+        :return:
+        """
         self.canvas.delete("all")
         self.canvas.create_image(0, 0, image=self.bg_photo, anchor="nw")
 
@@ -109,16 +129,15 @@ class MainMenuWindow:
         self.canvas.tag_bind(self.button_logowanie, "<Button-1>", lambda e: self.show_login_screen())
         self.canvas.tag_bind(self.button_wyjscie, "<Button-1>", self.wyjscie)
 
-    def start_new_game(self, event):
-        self.master.withdraw()
-
-        win = NewGameWindow(self.master, user=self.user)
 
     def wyjscie(self, event):
+        """
+        Zamkniecie okna
+        :param event:
+        :return:
+        """
         self.master.destroy()
 
-    def logowanie(self, event):
-        print("Logowanie")
 
     #def exit(self, event = None):
      #   self.master.deiconify()
