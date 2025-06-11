@@ -13,8 +13,6 @@ class HangmanWindow:
         self.window.resizable(False, False)
         self.window.protocol("WM_DELETE_WINDOW", self.exit_back)
 
-        print("Zalogowany:", self.user)
-
         script_dir = os.path.dirname(os.path.abspath(__file__))
         parent_dir = os.path.dirname(script_dir)
         image_path = os.path.join(parent_dir, "Assets", "wisielec.png")

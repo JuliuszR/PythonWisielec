@@ -31,6 +31,12 @@ baza.create_tables([Haslo, User], safe=True)
 if Haslo().select().count() == 0:
     inst_haslo = Haslo(tekst="python")
     inst_haslo.save()
+    inst_haslo = Haslo(tekst="wisielec")
+    inst_haslo.save()
+    inst_haslo = Haslo(tekst="Lewandowski")
+    inst_haslo.save()
+    inst_haslo = Haslo(tekst="Skibidi")
+    inst_haslo.save()
 
 inst_haslo = Haslo.select().where(Haslo.tekst == "python").get()
 
